@@ -37,3 +37,11 @@ export function D03_prioritiesSumOf(values: string[]): number {
         return total + priority;
     }, 0)
 }
+
+export function D03_extractGroupsOf3From(values: string[]): [string,string,string][] {
+    const results: [string,string,string][] = [];
+    for(let i=0; i<values.length; i+=3) {
+        results.push([ values[i], values[i+1], values[i+2] ])
+    }
+    return results;
+}

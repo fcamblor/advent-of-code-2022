@@ -1,7 +1,7 @@
 
 import {D03_INPUT, D03_Q1_SAMPLE, D03_Q2_SAMPLE} from "./2022-03.inputs";
 import {
-    D03_compartimentize,
+    D03_compartimentize, D03_extractGroupsOf3From,
     D03_findSimilarInHalves,
     D03_prioritiesSumOf,
     D03_priorityOf
@@ -30,6 +30,14 @@ test("Q1 Sample", () => {
 
 test("Q1 Input", () => {
     expect(D03_prioritiesSumOf(D03_INPUT.split("\n"))).toEqual(7597);
+})
+
+test(`D03_extractGroupsOf3From`, () => {
+    const groups = D03_extractGroupsOf3From(D03_Q1_SAMPLE.split("\n"));
+    expect(groups).toEqual([
+        [`vJrwpWtwJgWrhcsFMMfFFhFp`, `jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL`, `PmmdzqPrVvPwwTWBwg`],
+        [`wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn`, `ttgJtRGJQctTZtZT`, `CrZsJsPPZsGzwwsLwLmpwMDw`],
+    ])
 })
 
 /*

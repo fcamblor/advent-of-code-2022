@@ -5,6 +5,14 @@ export class Arrays {
         return arr1.filter(elem1 => arr2.includes(elem1));
     }
 
+    // Not sure if I can make a better signature with only a spread argument,
+    // but with enforcement of an array of length >= 1
+    static intersectAcross<T>(first: T[], ...arrays: T[][]): T[] {
+        return arrays.reduce((intersections, array) => {
+            return Arrays.intersect(intersections, array);
+        }, first);
+    }
+
     static unique<T>(arr: T[]): T[] {
         return [...new Set(arr)];
     }

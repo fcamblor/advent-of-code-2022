@@ -1,5 +1,10 @@
 
 import {D03_INPUT, D03_Q1_SAMPLE, D03_Q2_SAMPLE} from "./2022-03.inputs";
+import {D03_compartimentize} from "../src/2022-03";
+
+test("D03_compartimentize", () => {
+    expect(D03_compartimentize(`vJrwpWtwJgWrhcsFMMfFFhFp`)).toEqual([`vJrwpWtwJgWr`, `hcsFMMfFFhFp`])
+})
 
 /*
 test("Q1 Sample", () => {

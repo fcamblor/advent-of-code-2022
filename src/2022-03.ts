@@ -54,3 +54,10 @@ export function D03_findSimilarInGroups(groups: [string,string,string]): string 
 
     return intersections[0][0];
 }
+
+export function D03_prioritiesSumInGroups(values: string[]): number {
+    const groups = D03_extractGroupsOf3From(values)
+    const groupSimilarities = groups.map(D03_findSimilarInGroups);
+    const groupPriorities = groupSimilarities.map(D03_priorityOf);
+    return groupPriorities.reduce((total, priority) => total+priority, 0);
+}

@@ -8,11 +8,6 @@ ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw
 `.trim()
 
-export const D03_Q2_SAMPLE = `
-blabla
-blabla
-`.trim()
-
 export const D03_INPUT = `
 zBBtHnnHtwwHplmlRlzPLCpp
 vvhJccJFGFcNsdNNJbhJsJQplQMRLQMlfdfTPCLfQQCT

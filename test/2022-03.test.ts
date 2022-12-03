@@ -1,8 +1,8 @@
 
-import {D03_INPUT, D03_Q1_SAMPLE, D03_Q2_SAMPLE} from "./2022-03.inputs";
+import {D03_INPUT, D03_Q1_SAMPLE} from "./2022-03.inputs";
 import {
     D03_compartimentize, D03_extractGroupsOf3From, D03_findSimilarInGroups,
-    D03_findSimilarInHalves,
+    D03_findSimilarInHalves, D03_prioritiesSumInGroups,
     D03_prioritiesSumOf,
     D03_priorityOf
 } from "../src/2022-03";
@@ -50,12 +50,10 @@ test('D03_findSimilarInGroups', () => {
     ).toEqual('Z')
 })
 
-/*
-test("Q2 Sample ", () => {
-    expect(`an imported sample ${D03_Q2_SAMPLE} from 2022-03.inputs.ts which is then processed by src/2022-03.ts functions`).toEqual(`an expected result from 2022-03.inputs.ts`);
+test("Q2 Sample", () => {
+    expect(D03_prioritiesSumInGroups(D03_Q1_SAMPLE.split("\n"))).toEqual(70);
 })
 
-test("Q2 Input ", () => {
-    expect(`an imported sample ${D03_INPUT} from 2022-03.inputs.ts which is then processed by src/2022-03.ts functions`).toEqual(`an expected result from 2022-03.inputs.ts`);
+test("Q2 Input", () => {
+    expect(D03_prioritiesSumInGroups(D03_INPUT.split("\n"))).toEqual(2607);
 })
-*/

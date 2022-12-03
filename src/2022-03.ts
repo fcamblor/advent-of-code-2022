@@ -8,7 +8,7 @@ export function D03_compartimentize(str: string): [string,string] {
     return [ str.substring(0, str.length/2), str.substring(str.length/2) ];
 }
 
-export function D03_findSimilarInHalves(str: string) {
+export function D03_findSimilarInHalves(str: string): string {
     const compartiments = D03_compartimentize(str)
     const commonItems = Arrays.intersect(
         Arrays.unique(compartiments[0].split("")),
@@ -44,4 +44,13 @@ export function D03_extractGroupsOf3From(values: string[]): [string,string,strin
         results.push([ values[i], values[i+1], values[i+2] ])
     }
     return results;
+}
+
+export function D03_findSimilarInGroups(groups: [string,string,string]): string {
+    const chars = groups.map(line => Arrays.unique(line.split("")))
+    const intersections = Arrays.intersectAcross(chars[0], ...chars.slice(1));
+
+    assert(intersections.length === 1);
+
+    return intersections[0][0];
 }

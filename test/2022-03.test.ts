@@ -1,11 +1,12 @@
 
 import {D03_INPUT, D03_Q1_SAMPLE, D03_Q2_SAMPLE} from "./2022-03.inputs";
 import {
-    D03_compartimentize, D03_extractGroupsOf3From,
+    D03_compartimentize, D03_extractGroupsOf3From, D03_findSimilarInGroups,
     D03_findSimilarInHalves,
     D03_prioritiesSumOf,
     D03_priorityOf
 } from "../src/2022-03";
+import {Arrays} from "../src/utils";
 
 test("D03_compartimentize", () => {
     expect(D03_compartimentize(`vJrwpWtwJgWrhcsFMMfFFhFp`)).toEqual([`vJrwpWtwJgWr`, `hcsFMMfFFhFp`])
@@ -38,6 +39,15 @@ test(`D03_extractGroupsOf3From`, () => {
         [`vJrwpWtwJgWrhcsFMMfFFhFp`, `jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL`, `PmmdzqPrVvPwwTWBwg`],
         [`wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn`, `ttgJtRGJQctTZtZT`, `CrZsJsPPZsGzwwsLwLmpwMDw`],
     ])
+})
+
+test('D03_findSimilarInGroups', () => {
+    expect(D03_findSimilarInGroups(
+        [`vJrwpWtwJgWrhcsFMMfFFhFp`, `jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL`, `PmmdzqPrVvPwwTWBwg`])
+    ).toEqual('r')
+    expect(D03_findSimilarInGroups(
+        [`wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn`, `ttgJtRGJQctTZtZT`, `CrZsJsPPZsGzwwsLwLmpwMDw`])
+    ).toEqual('Z')
 })
 
 /*

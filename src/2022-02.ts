@@ -14,3 +14,10 @@ export const D02_ROUND_OUTCOMES: {[key in `${'A'|'B'|'C'} ${'X'|'Y'|'Z'}`]: {sha
     "C Z": {shapeScore: 3, outcomeScore: 3},
 } as const;
 
+export function D02_totalScoreOf(value: string): number {
+    const rounds = value.split("\n") as Array<keyof typeof D02_ROUND_OUTCOMES>;
+    return rounds.reduce((total, round) =>
+        total + D02_ROUND_OUTCOMES[round].shapeScore + D02_ROUND_OUTCOMES[round].outcomeScore,
+        0
+    );
+}

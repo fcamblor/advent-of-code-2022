@@ -1,5 +1,21 @@
 export type MatrixCoord = { x: number, y: number };
 
+export class Arrays {
+    static intersect<T>(arr1: T[], arr2: T[]): T[] {
+        return arr1.filter(elem1 => arr2.includes(elem1));
+    }
+
+    static unique<T>(arr: T[]): T[] {
+        return [...new Set(arr)];
+    }
+}
+
+export function assert(value: unknown, errorMessage?: string): asserts value {
+    if(!value) {
+        throw new Error(`Assertion failed !${errorMessage?` ${errorMessage}`:''}`)
+    }
+}
+
 export function extractColumnBasedValues<A1>(...arrays: [GSheetCells]): [ A1[] ];
 export function extractColumnBasedValues<A1,A2>(...arrays: [GSheetCells,GSheetCells]): [ A1[], A2[] ];
 export function extractColumnBasedValues<A1,A2,A3>(...arrays: [GSheetCells,GSheetCells,GSheetCells]): [ A1[], A2[], A3[] ];

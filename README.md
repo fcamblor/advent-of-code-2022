@@ -4,6 +4,14 @@ With `node` 12+, run : `npm ci`
 
 Then, on a daily basis, execute `./create-new.sh` script everyday to prepare your workspace with new content (source, tests, inputs)
 
+# Results
+
+Results are available publicly (with my personal input seeds) into
+[this google spreadsheet](https://docs.google.com/spreadsheets/d/1JbXFDJBsfKLYu7vhR1ywEHf9_Cd7pZsiTCEJCLFvohc/edit?usp=sharing)
+
+Every DAY will have 1 dedicated spreadsheet tab with some formula calling scripts defined in src/*.ts files.
+
+
 # Deploy
 
 - Authenticate with `clasp` (google app script CLI) with `npx clasp login` (follow instructions)  

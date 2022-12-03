@@ -1,0 +1,2 @@
+
+declare type GSheetCells = string[][];

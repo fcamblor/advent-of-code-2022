@@ -29,3 +29,11 @@ export function D03_priorityOf(char: string): number {
     }
     throw new Error(`Invalid char passed to D03_priorityOf(): ${char}`)
 }
+
+export function D03_prioritiesSumOf(values: string[]): number {
+    return values.reduce((total, value) => {
+        const similar = D03_findSimilarInHalves(value);
+        const priority = D03_priorityOf(similar);
+        return total + priority;
+    }, 0)
+}

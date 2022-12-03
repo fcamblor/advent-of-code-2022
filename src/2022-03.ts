@@ -19,3 +19,13 @@ export function D03_findSimilarInHalves(str: string) {
 
     return commonItems[0];
 }
+
+export function D03_priorityOf(char: string): number {
+    if(char >= 'a' && char <= 'z') {
+        return char.charCodeAt(0) - 'a'.charCodeAt(0) + 1;
+    }
+    if(char >= 'A' && char <= 'Z') {
+        return char.charCodeAt(0) - 'A'.charCodeAt(0) + 27;
+    }
+    throw new Error(`Invalid char passed to D03_priorityOf(): ${char}`)
+}

@@ -14,6 +14,7 @@ cat > "test/$year-$day.test.ts" << ENDOFFILE
 
 import {D${day}_INPUT, D${day}_Q1_SAMPLE, D${day}_Q2_SAMPLE} from "./$year-$day.inputs";
 
+/*
 test("Q1 Sample", () => {
     expect(\`an imported sample \${D${day}_Q1_SAMPLE} from $year-${day}.inputs.ts which is then processed by src/$year-${day}.ts functions\`).toEqual(\`an expected result from $year-${day}.inputs.ts\`);
 })
@@ -29,7 +30,7 @@ test("Q2 Sample ", () => {
 test("Q2 Input ", () => {
     expect(\`an imported sample \${D${day}_INPUT} from $year-${day}.inputs.ts which is then processed by src/$year-${day}.ts functions\`).toEqual(\`an expected result from $year-${day}.inputs.ts\`);
 })
-
+*/
 
 ENDOFFILE
 

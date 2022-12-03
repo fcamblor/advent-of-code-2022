@@ -1,7 +1,7 @@
 #!/bin/bash
 
-year=$(date '+%Y')
-day=$(date '+%d')
+year=${2:-`date '+%Y'`}
+day=${1:-`date '+%d'`}
 
 cat > "src/$year-$day.ts" << ENDOFFILE
 

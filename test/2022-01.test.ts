@@ -1,6 +1,6 @@
 
 import {D01_INPUT, D01_Q1_SAMPLE} from "./2022-01.inputs";
-import {D01_elfMaxCalories, D01_extractElfFood} from "../src/2022-01";
+import {D01_elfMaxCalories, D01_extractElfFood, D01_sumOfTop3MaxCalories} from "../src/2022-01";
 
 
 test("D01_extractElfFood", () => {
@@ -20,13 +20,11 @@ test("Q1 Sample", () => {
 test("Q1 Input", () => {
     expect(D01_elfMaxCalories(D01_INPUT)).toEqual(69693);
 })
-/*
-test("Q2 Sample ", () => {
-    expect(`an imported sample ${D01_Q2_SAMPLE} from 2022-01.inputs.ts which is then processed by src/2022-01.ts functions`).toEqual(`an expected result from 2022-01.inputs.ts`);
+
+test("Q2 Sample", () => {
+    expect(D01_sumOfTop3MaxCalories(D01_Q1_SAMPLE)).toEqual(45000);
 })
 
-test("Q2 Input ", () => {
-    expect(`an imported sample ${D01_INPUT} from 2022-01.inputs.ts which is then processed by src/2022-01.ts functions`).toEqual(`an expected result from 2022-01.inputs.ts`);
+test("Q2 Input", () => {
+    expect(D01_sumOfTop3MaxCalories(D01_INPUT)).toEqual(200945);
 })
-*/
-

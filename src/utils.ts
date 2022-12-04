@@ -1,5 +1,5 @@
 export type MatrixCoord = { x: number, y: number };
-export type Ranged<T extends string|number|bigint|boolean> = { lowerBound: `${'included'|'excluded'}:${T}`, upperBound: `${'included'|'excluded'}:${T}` };
+
 
 export class Arrays {
     static intersect<T>(arr1: T[], arr2: T[]): T[] {
@@ -18,6 +18,45 @@ export class Arrays {
         return [...new Set(arr)];
     }
 }
+
+export type Comparable = number;
+export class Ranged<T extends Comparable> {
+    constructor(
+        public readonly lowerBound: T, public readonly lowerIncluded: boolean = true,
+        public readonly upperBound: T, public readonly upperIncluded: boolean = true,
+    ) {
+        if(this.firstLowerValue > this.firstLowerValue) {
+            throw new Error(`Invalid range: [${this.firstLowerValue}, ${this.firstUpperValue}]`)
+        }
+    }
+
+    get firstLowerValue(){ return this.firstBoundedValue('lower', this.lowerBound, this.lowerIncluded); }
+    get firstUpperValue(){ return this.firstBoundedValue('upper', this.upperBound, this.upperIncluded); }
+
+    includes(other: Ranged<T>): boolean {
+        return this.firstLowerValue <= other.firstLowerValue
+            && this.firstUpperValue >= other.firstUpperValue;
+    }
+
+    private firstBoundedValue(boundType: 'lower'|'upper', value: T, included: boolean): number {
+        return included
+            ?value
+            :boundType==='lower'?value+1:value-1;
+    }
+
+    static countFullOverlaps<T extends Comparable>(rangeds: Array<Ranged<T>>): Array<{ranged: Ranged<T>, includes: Ranged<T>}> {
+        let overlaps: Array<{ranged: Ranged<T>, includes: Ranged<T>}> = [];
+        for(let i=0; i<rangeds.length; i++) {
+            for(let j=0; j<rangeds.length; j++) {
+                if(i!==j && rangeds[i].includes(rangeds[j])){
+                    overlaps.push({ranged: rangeds[i], includes: rangeds[j] })
+                }
+            }
+        }
+        return overlaps;
+    }
+}
+
 
 export function assert(value: unknown, errorMessage?: string): asserts value {
     if(!value) {

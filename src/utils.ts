@@ -1,4 +1,5 @@
 export type MatrixCoord = { x: number, y: number };
+export type Ranged<T extends string|number|bigint|boolean> = { lowerBound: `${'included'|'excluded'}:${T}`, upperBound: `${'included'|'excluded'}:${T}` };
 
 export class Arrays {
     static intersect<T>(arr1: T[], arr2: T[]): T[] {

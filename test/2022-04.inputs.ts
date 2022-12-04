@@ -8,11 +8,6 @@ export const D04_Q1_SAMPLE = `
 2-6,4-8
 `.trim()
 
-export const D04_Q2_SAMPLE = `
-blabla
-blabla
-`.trim()
-
 export const D04_INPUT = `
 2-9,9-51
 33-51,45-73

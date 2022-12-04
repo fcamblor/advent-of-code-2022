@@ -15,8 +15,15 @@ export function D04_parseRanges(str: string): Array<Ranged<number>[]> {
         )
 }
 
-export function D04_countSectionsOverlaps(sectionGroups: Array<Ranged<number>[]>): number {
+export function D04_countFullSectionsOverlaps(sectionGroups: Array<Ranged<number>[]>): number {
     return sectionGroups.reduce((total, sectionGroup) => {
         return total + (Ranged.countFullOverlaps(sectionGroup).length?1:0);
+    }, 0)
+}
+
+export function D04_countSectionsOverlaps(sectionGroups: Array<Ranged<number>[]>): number {
+    return sectionGroups.reduce((total, sectionGroup) => {
+        const overlapsCount = Ranged.countOverlaps(sectionGroup).length;
+        return total + (overlapsCount?1:0);
     }, 0)
 }

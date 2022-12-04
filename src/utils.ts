@@ -44,12 +44,33 @@ export class Ranged<T extends Comparable> {
             :boundType==='lower'?value+1:value-1;
     }
 
+    public overlapsWith(other: Ranged<T>): boolean {
+        return !this.dontOverlapsWith(other);
+    }
+
+    public dontOverlapsWith(other: Ranged<T>): boolean {
+        return this.firstUpperValue < other.firstLowerValue
+            || this.firstLowerValue > other.firstUpperValue;
+    }
+
     static countFullOverlaps<T extends Comparable>(rangeds: Array<Ranged<T>>): Array<{ranged: Ranged<T>, includes: Ranged<T>}> {
         let overlaps: Array<{ranged: Ranged<T>, includes: Ranged<T>}> = [];
         for(let i=0; i<rangeds.length; i++) {
             for(let j=0; j<rangeds.length; j++) {
                 if(i!==j && rangeds[i].includes(rangeds[j])){
                     overlaps.push({ranged: rangeds[i], includes: rangeds[j] })
+                }
+            }
+        }
+        return overlaps;
+    }
+
+    static countOverlaps<T extends Comparable>(rangeds: Array<Ranged<T>>): Array<{r1: Ranged<T>, r2: Ranged<T>}> {
+        let overlaps: Array<{r1: Ranged<T>, r2: Ranged<T>}> = [];
+        for(let i=0; i<rangeds.length; i++) {
+            for(let j=i+1; j<rangeds.length; j++) {
+                if(i!==j && rangeds[i].overlapsWith(rangeds[j])){
+                    overlaps.push({r1: rangeds[i], r2: rangeds[j] })
                 }
             }
         }

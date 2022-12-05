@@ -3,8 +3,9 @@
 // ... or simply function that are going to be tested into corresponding ../test/2022-05.test.ts file
 
 export type D05Procedure = { numberOfCratesMoved: number, fromStack: number, toStack: number };
+export type D05Stacks = Array<string[]>;
 export type D05Statements = {
-    startingStacks: Array<string[]>,
+    startingStacks: D05Stacks,
     procedures: D05Procedure[]
 }
 
@@ -12,7 +13,7 @@ export function D05ReadStackIdsCount(line: string): number {
     return line.split(" ").filter(v => !!v).length;
 }
 
-export function D05ReadStartingStacks(stacksCount: number, stackLines: string[]): Array<string[]> {
+export function D05ReadStartingStacks(stacksCount: number, stackLines: string[]): D05Stacks {
     const startingReversedStacks = Array(stacksCount+1).fill(0).map(_ => [] as string[]);
     stackLines.map(stackLineStr => {
         for(let i=0; i<stacksCount; i++) {
@@ -44,7 +45,7 @@ export function D05_readInput(input: string): D05Statements {
     return {startingStacks, procedures};
 }
 
-export function D05_printStacks(stacks: Array<string[]>) {
+export function D05_printStacks(stacks: D05Stacks) {
     const maxStackSize = Math.max(...stacks.map(items => items.length));
     const out = Array(maxStackSize)
         .fill(-1)
@@ -63,4 +64,14 @@ export function D05_printStacks(stacks: Array<string[]>) {
         ).join("\n");
     console.log(out);
     return out;
+}
+
+export function D05_processProcedures(stacks: D05Stacks, procedure: D05Procedure): void {
+    for(var i=0; i<procedure.numberOfCratesMoved; i++) {
+        const crate = stacks[procedure.fromStack].pop()
+        if(!crate) {
+            throw new Error("Trying to pick crate from an empty stack !")
+        }
+        stacks[procedure.toStack].push(crate);
+    }
 }

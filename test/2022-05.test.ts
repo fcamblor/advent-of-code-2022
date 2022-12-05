@@ -1,7 +1,7 @@
 
 import {D05_INPUT, D05_Q1_SAMPLE, D05_Q2_SAMPLE} from "./2022-05.inputs";
 import {
-    D05_printStacks, D05_readInput,
+    D05_printStacks, D05_processProcedures, D05_readInput,
     D05ReadProcedures,
     D05ReadStackIdsCount,
     D05ReadStartingStacks
@@ -38,10 +38,21 @@ move 1 from 1 to 2
 })
 
 test(`printing stacks`, () => {
-    expect(D05_printStacks(D05_readInput(D05_Q1_SAMPLE).startingStacks)).toEqual(`    [D]    
+    expect(D05_printStacks(D05_readInput(D05_Q1_SAMPLE).startingStacks)).toEqual(`
+    [D]    
 [N] [C]    
 [Z] [M] [P]
- 1   2   3 `)
+ 1   2   3 `.split("\n").slice(1).join("\n"))
+})
+
+test(`Executing one procedure`, () => {
+    const statement = D05_readInput(D05_Q1_SAMPLE);
+    D05_processProcedures(statement.startingStacks, statement.procedures[0]);
+    expect(D05_printStacks(statement.startingStacks)).toEqual(`
+[D]        
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 `.split("\n").slice(1).join("\n"))
 })
 
 /*

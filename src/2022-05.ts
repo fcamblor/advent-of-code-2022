@@ -68,23 +68,30 @@ export function D05_printStacks(stacks: D05Stacks) {
     return out;
 }
 
-export function D05_processProcedure(stacks: D05Stacks, procedure: D05Procedure): void {
+export function D05_processProcedure(stacks: D05Stacks, procedure: D05Procedure, crateMoverModel: '9000'|'9001' = '9000'): void {
+    const cratesToAdd = [];
     for(var i=0; i<procedure.numberOfCratesMoved; i++) {
         const crate = stacks[procedure.fromStack].pop()
         if(!crate) {
             throw new Error("Trying to pick crate from an empty stack !")
         }
-        stacks[procedure.toStack].push(crate);
+        cratesToAdd.push(crate);
     }
+
+    if(crateMoverModel === '9001') {
+        cratesToAdd.reverse();
+    }
+
+    stacks[procedure.toStack].push(...cratesToAdd);
 }
 
 export function D05GetTopCrates(stacks: D05Stacks): string {
     return stacks.slice(1).map(stack => stack[stack.length-1]).join("")
 }
 
-export function D05_processInput(input: string) {
+export function D05_processInput(input: string, crateMoverModel: '9000'|'9001' = '9000') {
     const statement = D05_readInput(input);
     const stacks = statement.startingStacks;
-    statement.procedures.forEach(procedure => D05_processProcedure(stacks, procedure));
+    statement.procedures.forEach(procedure => D05_processProcedure(stacks, procedure, crateMoverModel));
     return D05GetTopCrates(stacks);
 }

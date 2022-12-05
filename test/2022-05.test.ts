@@ -1,7 +1,7 @@
 
 import {D05_INPUT, D05_Q1_SAMPLE, D05_Q2_SAMPLE} from "./2022-05.inputs";
 import {
-    D05_printStacks, D05_processProcedures, D05_readInput,
+    D05_printStacks, D05_processInput, D05_processProcedure, D05_readInput,
     D05ReadProcedures,
     D05ReadStackIdsCount,
     D05ReadStartingStacks
@@ -12,14 +12,38 @@ test("stack sizes", () => {
     expect(D05ReadStackIdsCount(` 1   2   3 `)).toEqual(3);
 })
 
-test(`reading starting stacks`, () => {
-    expect(D05ReadStartingStacks(3, `    [D]    
+test(`reading starting stacks SAMPLE`, () => {
+    expect(D05ReadStartingStacks(3, `
+    [D]    
 [N] [C]    
-[Z] [M] [P]`.split("\n"))).toEqual([
+[Z] [M] [P]`.split("\n").slice(1))).toEqual([
         [],
-        ['Z','N'],
-        ['M','C','D'],
-        ['P']
+        "ZN".split(""),
+        "MCD".split(""),
+        "P".split(""),
+    ])
+})
+
+test(`reading starting stacks INPUT`, () => {
+    expect(D05ReadStartingStacks(9, `
+        [F] [Q]         [Q]        
+[B]     [Q] [V] [D]     [S]        
+[S] [P] [T] [R] [M]     [D]        
+[J] [V] [W] [M] [F]     [J]     [J]
+[Z] [G] [S] [W] [N] [D] [R]     [T]
+[V] [M] [B] [G] [S] [C] [T] [V] [S]
+[D] [S] [L] [J] [L] [G] [G] [F] [R]
+[G] [Z] [C] [H] [C] [R] [H] [P] [D]`.split("\n").slice(1))).toEqual([
+        [],
+        "GDVZJSB".split(""),
+        "ZSMGVP".split(""),
+        "CLBSWTQF".split(""),
+        "HJGWMRVQ".split(""),
+        "CLSNFMD".split(""),
+        "RGCD".split(""),
+        "HGTRJDSQ".split(""),
+        "PFV".split(""),
+        "DRSTJ".split(""),
     ])
 })
 
@@ -47,7 +71,7 @@ test(`printing stacks`, () => {
 
 test(`Executing one procedure`, () => {
     const statement = D05_readInput(D05_Q1_SAMPLE);
-    D05_processProcedures(statement.startingStacks, statement.procedures[0]);
+    D05_processProcedure(statement.startingStacks, statement.procedures[0]);
     expect(D05_printStacks(statement.startingStacks)).toEqual(`
 [D]        
 [N] [C]    
@@ -55,15 +79,14 @@ test(`Executing one procedure`, () => {
  1   2   3 `.split("\n").slice(1).join("\n"))
 })
 
-/*
 test("Q1 Sample", () => {
-    expect(D05_superFunctionForQ1(D05_Q1_SAMPLE)).toEqual(42);
+    expect(D05_processInput(D05_Q1_SAMPLE)).toEqual("CMZ");
 })
 
 test("Q1 Input", () => {
-    expect(D05_superFunctionForQ1(D05_INPUT)).toEqual(42);
+    expect(D05_processInput(D05_INPUT)).toEqual("WCZTHTMPS");
 })
-
+/*
 test("Q2 Sample", () => {
     expect(D05_superFunctionForQ2(D05_Q2_SAMPLE)).toEqual(42);
 })

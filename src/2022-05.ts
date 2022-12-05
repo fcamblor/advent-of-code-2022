@@ -2,6 +2,8 @@
 // TODO: Fill into this file utility functions to display stuff into the spreadsheet
 // ... or simply function that are going to be tested into corresponding ../test/2022-05.test.ts file
 
+import {D05_Q1_SAMPLE} from "../test/2022-05.inputs";
+
 export type D05Procedure = { numberOfCratesMoved: number, fromStack: number, toStack: number };
 export type D05Stacks = Array<string[]>;
 export type D05Statements = {
@@ -18,7 +20,7 @@ export function D05ReadStartingStacks(stacksCount: number, stackLines: string[])
     stackLines.map(stackLineStr => {
         for(let i=0; i<stacksCount; i++) {
             const crate = stackLineStr[i*"[?] ".length + "[".length];
-            if(crate !== ' ') {
+            if(crate && crate !== ' ') {
                 startingReversedStacks[i+1].push(crate);
             }
         }
@@ -66,7 +68,7 @@ export function D05_printStacks(stacks: D05Stacks) {
     return out;
 }
 
-export function D05_processProcedures(stacks: D05Stacks, procedure: D05Procedure): void {
+export function D05_processProcedure(stacks: D05Stacks, procedure: D05Procedure): void {
     for(var i=0; i<procedure.numberOfCratesMoved; i++) {
         const crate = stacks[procedure.fromStack].pop()
         if(!crate) {
@@ -74,4 +76,15 @@ export function D05_processProcedures(stacks: D05Stacks, procedure: D05Procedure
         }
         stacks[procedure.toStack].push(crate);
     }
+}
+
+export function D05GetTopCrates(stacks: D05Stacks): string {
+    return stacks.slice(1).map(stack => stack[stack.length-1]).join("")
+}
+
+export function D05_processInput(input: string) {
+    const statement = D05_readInput(input);
+    const stacks = statement.startingStacks;
+    statement.procedures.forEach(procedure => D05_processProcedure(stacks, procedure));
+    return D05GetTopCrates(stacks);
 }

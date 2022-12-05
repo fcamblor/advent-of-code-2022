@@ -8,8 +8,7 @@ export const D05_Q1_SAMPLE = `
 move 1 from 2 to 1
 move 3 from 1 to 3
 move 2 from 2 to 1
-move 1 from 1 to 2
-`.split("\n").slice(1).join("\n")
+move 1 from 1 to 2`.split("\n").slice(1).join("\n")
 
 export const D01_Q1_EXPECTATIONS = [
     `
@@ -559,6 +558,4 @@ move 7 from 1 to 8
 move 1 from 3 to 6
 move 4 from 5 to 4
 move 1 from 5 to 2
-move 8 from 4 to 9
-`.trim()
-
+move 8 from 4 to 9`.split("\n").slice(1).join("\n")

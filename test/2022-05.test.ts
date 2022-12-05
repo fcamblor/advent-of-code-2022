@@ -86,14 +86,11 @@ test("Q1 Sample", () => {
 test("Q1 Input", () => {
     expect(D05_processInput(D05_INPUT)).toEqual("WCZTHTMPS");
 })
-/*
+
 test("Q2 Sample", () => {
-    expect(D05_superFunctionForQ2(D05_Q2_SAMPLE)).toEqual(42);
+    expect(D05_processInput(D05_Q1_SAMPLE, "9001")).toEqual("MCD");
 })
 
 test("Q2 Input", () => {
-    expect(D05_superFunctionForQ2(D05_INPUT)).toEqual(42);
+    expect(D05_processInput(D05_INPUT, "9001")).toEqual("BLSGJSDTS");
 })
-
-*/
-

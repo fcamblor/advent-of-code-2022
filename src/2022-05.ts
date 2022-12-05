@@ -2,10 +2,10 @@
 // TODO: Fill into this file utility functions to display stuff into the spreadsheet
 // ... or simply function that are going to be tested into corresponding ../test/2022-05.test.ts file
 
-export type D05Operation = { numberOfCratesMoved: number, fromStack: number, toStack: number };
+export type D05Procedure = { numberOfCratesMoved: number, fromStack: number, toStack: number };
 export type D05Statements = {
     startingStacks: Array<string[]>,
-    operations: D05Operation[]
+    procedures: D05Procedure[]
 }
 
 export function D05ReadStackIdsCount(line: string): number {
@@ -23,4 +23,11 @@ export function D05ReadStartingStacks(stacksCount: number, stackLines: string[])
         }
     })
     return startingReversedStacks.map(reversedStack => reversedStack.reverse());
+}
+
+export function D05ReadProcedures(procedureStr: string): D05Procedure[] {
+    return procedureStr.split("\n").map(line => {
+        const [_1, numberOfCratesMoved, _2, fromStack, _3, toStack ] = line.split(" ").map(Number);
+        return {numberOfCratesMoved, fromStack, toStack };
+    })
 }

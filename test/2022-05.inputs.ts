@@ -9,7 +9,7 @@ move 1 from 2 to 1
 move 3 from 1 to 3
 move 2 from 2 to 1
 move 1 from 1 to 2
-`.trim()
+`.split("\n").slice(1).join("\n")
 
 export const D01_Q1_EXPECTATIONS = [
     `
@@ -39,7 +39,7 @@ export const D01_Q1_EXPECTATIONS = [
 [C] [M] [P]
  1   2   3
      `,
-].map(str => str.trim())
+].map(str => str.split("\n").slice(1).join("\n"))
 
 
 export const D05_Q2_SAMPLE = `

@@ -1,6 +1,11 @@
 
 import {D05_INPUT, D05_Q1_SAMPLE, D05_Q2_SAMPLE} from "./2022-05.inputs";
-import {D05ReadProcedures, D05ReadStackIdsCount, D05ReadStartingStacks} from "../src/2022-05";
+import {
+    D05_printStacks, D05_readInput,
+    D05ReadProcedures,
+    D05ReadStackIdsCount,
+    D05ReadStartingStacks
+} from "../src/2022-05";
 // import {D05_superFunctionForQ1, D05_superFunctionForQ2} from "../src/2022-05";
 
 test("stack sizes", () => {
@@ -30,6 +35,13 @@ move 1 from 1 to 2
         {numberOfCratesMoved: 2, fromStack: 2, toStack: 1},
         {numberOfCratesMoved: 1, fromStack: 1, toStack: 2},
     ])
+})
+
+test(`printing stacks`, () => {
+    expect(D05_printStacks(D05_readInput(D05_Q1_SAMPLE).startingStacks)).toEqual(`    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 `)
 })
 
 /*

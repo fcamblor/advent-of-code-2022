@@ -2,8 +2,6 @@
 // TODO: Fill into this file utility functions to display stuff into the spreadsheet
 // ... or simply function that are going to be tested into corresponding ../test/2022-06.test.ts file
 
-const D06_CONSECUTIVE_THRESHOLD = 4;
-
 function D06ContainsTwiceSameLetter(str: string) {
     const found = new Set();
     for(let i=0; i<str.length; i++) {
@@ -15,9 +13,9 @@ function D06ContainsTwiceSameLetter(str: string) {
     return false;
 }
 
-export function D06_findFirstNonConsecutive(str: string): number {
-    const buff = str.substring(0, D06_CONSECUTIVE_THRESHOLD).split("");
-    let offset = D06_CONSECUTIVE_THRESHOLD;
+export function D06_findFirstNonConsecutive(str: string, consecutiveThreshold: number = 4): number {
+    const buff = str.substring(0, consecutiveThreshold).split("");
+    let offset = consecutiveThreshold;
     while(D06ContainsTwiceSameLetter(buff.join(""))) {
         buff.push(str[offset]);
         buff.shift();

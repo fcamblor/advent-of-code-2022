@@ -8,6 +8,10 @@ cat > "src/$year-$day.ts" << ENDOFFILE
 // TODO: Fill into this file utility functions to display stuff into the spreadsheet
 // ... or simply function that are going to be tested into corresponding ../test/$year-$day.test.ts file
 
+export function D${day}_superFunctionForQ1(str: string) {
+    return 42
+}
+
 ENDOFFILE
 
 cat > "test/$year-$day.test.ts" << ENDOFFILE

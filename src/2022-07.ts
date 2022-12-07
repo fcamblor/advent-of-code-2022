@@ -90,3 +90,9 @@ export function D07_statsDirectories(dir: D07_DIRECTORY, path: string = "/"): D0
 
     return dirStats;
 }
+
+export function D07_sumDirectoriesGreaterThan(rootDir: D07_DIRECTORY, maxSizeThreshold: number): number {
+    return D07_statsDirectories(rootDir)
+        .filter(dirStat => dirStat.size <= maxSizeThreshold)
+        .reduce((total, dirStat) => total+dirStat.size, 0);
+}

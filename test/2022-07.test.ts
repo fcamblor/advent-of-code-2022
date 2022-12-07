@@ -4,7 +4,7 @@ import {
     D07_buildFSDisplay,
     D07_createFSFrom,
     D07_parseInput,
-    D07_statsDirectories
+    D07_statsDirectories, D07_sumDirectoriesGreaterThan
 } from "../src/2022-07";
 // import {D07_superFunctionForQ1, D07_superFunctionForQ2} from "../src/2022-07";
 
@@ -70,15 +70,16 @@ test("Building dir sizes", () => {
     ])
 })
 
-/*
 test("Q1 Sample", () => {
-    expect(D07_superFunctionForQ1(D07_Q1_SAMPLE)).toEqual(42);
+    let fs = D07_createFSFrom(D07_parseInput(D07_Q1_SAMPLE));
+    expect(D07_sumDirectoriesGreaterThan(fs, 100000)).toEqual(95437);
 })
 
 test("Q1 Input", () => {
-    expect(D07_superFunctionForQ1(D07_INPUT)).toEqual(42);
+    let fs = D07_createFSFrom(D07_parseInput(D07_INPUT));
+    expect(D07_sumDirectoriesGreaterThan(fs, 100000)).toEqual(1232307);
 })
-
+/*
 test("Q2 Sample", () => {
     expect(D07_superFunctionForQ2(D07_Q2_SAMPLE)).toEqual(42);
 })

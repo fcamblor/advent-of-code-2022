@@ -9,6 +9,8 @@ export type D07_FILE = { type: 'file', name: string, size: number }
 export type D07_DIRECTORY = { type: 'dir', nodes: (D07_DIRECTORY|D07_FILE)[] } &
     ({ parent: D07_DIRECTORY, name: string }|{ parent: null, name: '/' })
 
+export type D07_DIRSTAT = {dirPath: string, size: number};
+
 export function D07_parseInput(input: string): D07_EXECUTION[] {
     return input.substring("$ ".length).split("\n$ ").map(inputOutput => {
         const lines = inputOutput.split("\n")
@@ -67,4 +69,24 @@ export function D07_buildFSDisplay(rootDir: D07_DIRECTORY, indent: string = ""):
 
     const output = outputLines.join("\n")
     return output;
+}
+
+export function D07_statsDirectories(dir: D07_DIRECTORY, path: string = "/"): D07_DIRSTAT[] {
+    const dirStats: D07_DIRSTAT[] = [];
+
+    let dirSize = 0;
+    dir.nodes.forEach(node => {
+        if(node.type === 'file') {
+            dirSize += node.size;
+        } else {
+            const subDirStats = D07_statsDirectories(node, `${path}${node.name}/`)
+            dirStats.push(...subDirStats)
+            // By convention, last dir stat is the agglomerated size for node
+            dirSize += subDirStats[subDirStats.length-1].size
+        }
+    })
+
+    dirStats.push({ dirPath: path, size: dirSize });
+
+    return dirStats;
 }

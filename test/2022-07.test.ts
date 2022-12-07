@@ -1,6 +1,11 @@
 
 import {D07_INPUT, D07_Q1_SAMPLE, D07_Q2_SAMPLE} from "./2022-07.inputs";
-import {D07_buildFSDisplay, D07_createFSFrom, D07_parseInput} from "../src/2022-07";
+import {
+    D07_buildFSDisplay,
+    D07_createFSFrom,
+    D07_parseInput,
+    D07_statsDirectories
+} from "../src/2022-07";
 // import {D07_superFunctionForQ1, D07_superFunctionForQ2} from "../src/2022-07";
 
 test("reading IO", () => {
@@ -53,6 +58,16 @@ test("Building filesystem", () => {
     - d.ext (file, size=5626152)
     - k (file, size=7214296)    
     `.trim())
+})
+
+test("Building dir sizes", () => {
+    let fs = D07_createFSFrom(D07_parseInput(D07_Q1_SAMPLE));
+    expect(D07_statsDirectories(fs)).toEqual([
+        { "dirPath": "/a/e/", "size": 584 },
+        { "dirPath": "/a/", "size": 94853 },
+        { "dirPath": "/d/", "size": 24933642 },
+        { "dirPath": "/", "size": 48381165 }
+    ])
 })
 
 /*

@@ -96,3 +96,12 @@ export function D07_sumDirectoriesGreaterThan(rootDir: D07_DIRECTORY, maxSizeThr
         .filter(dirStat => dirStat.size <= maxSizeThreshold)
         .reduce((total, dirStat) => total+dirStat.size, 0);
 }
+
+export function D07_findSmallestDirSizeThatCanFrees(rootDir: D07_DIRECTORY, minFreeSpace: number, totalSpace: number): number {
+    const dirStats = D07_statsDirectories(rootDir)
+    const currentlyUnusedSpace = totalSpace - (dirStats.find(dirStat => dirStat.dirPath === '/')?.size || -1)
+
+    const dirStatsCandidate = dirStats.filter(dirStat => currentlyUnusedSpace + dirStat.size >= minFreeSpace);
+    return dirStatsCandidate
+        .sort((ds1, ds2) => ds1.size - ds2.size)[0].size
+}

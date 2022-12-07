@@ -2,7 +2,7 @@
 import {D07_INPUT, D07_Q1_SAMPLE, D07_Q2_SAMPLE} from "./2022-07.inputs";
 import {
     D07_buildFSDisplay,
-    D07_createFSFrom,
+    D07_createFSFrom, D07_findSmallestDirSizeThatCanFrees,
     D07_parseInput,
     D07_statsDirectories, D07_sumDirectoriesGreaterThan
 } from "../src/2022-07";
@@ -79,14 +79,14 @@ test("Q1 Input", () => {
     let fs = D07_createFSFrom(D07_parseInput(D07_INPUT));
     expect(D07_sumDirectoriesGreaterThan(fs, 100000)).toEqual(1232307);
 })
-/*
+
 test("Q2 Sample", () => {
-    expect(D07_superFunctionForQ2(D07_Q2_SAMPLE)).toEqual(42);
+    let fs = D07_createFSFrom(D07_parseInput(D07_Q1_SAMPLE));
+    expect(D07_findSmallestDirSizeThatCanFrees(fs, 30000000, 70000000)).toEqual(24933642);
 })
 
 test("Q2 Input", () => {
-    expect(D07_superFunctionForQ2(D07_INPUT)).toEqual(42);
+    let fs = D07_createFSFrom(D07_parseInput(D07_INPUT));
+    expect(D07_findSmallestDirSizeThatCanFrees(fs, 30000000, 70000000)).toEqual(7268994);
 })
-
-*/
 

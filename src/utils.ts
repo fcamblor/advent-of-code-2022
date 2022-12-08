@@ -30,8 +30,20 @@ export class Ranged<T extends Comparable> {
         }
     }
 
+    static included<T extends Comparable>(lowerBound: T, upperBound: T) {
+        return new Ranged(lowerBound,true,upperBound,true);
+    }
+
     get firstLowerValue(){ return this.firstBoundedValue('lower', this.lowerBound, this.lowerIncluded); }
     get firstUpperValue(){ return this.firstBoundedValue('upper', this.upperBound, this.upperIncluded); }
+
+    values(): number[] {
+        const results: number[] = [];
+        for (let i = this.firstLowerValue; i <= this.firstUpperValue; i++) {
+            results.push(i);
+        }
+        return results;
+    }
 
     includes(other: Ranged<T>): boolean {
         return this.firstLowerValue <= other.firstLowerValue

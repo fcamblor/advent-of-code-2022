@@ -30,8 +30,20 @@ export class Ranged<T extends Comparable> {
         }
     }
 
+    static included<T extends Comparable>(lowerBound: T, upperBound: T) {
+        return new Ranged(lowerBound,true,upperBound,true);
+    }
+
     get firstLowerValue(){ return this.firstBoundedValue('lower', this.lowerBound, this.lowerIncluded); }
     get firstUpperValue(){ return this.firstBoundedValue('upper', this.upperBound, this.upperIncluded); }
+
+    values(): number[] {
+        const results: number[] = [];
+        for (let i = this.firstLowerValue; i <= this.firstUpperValue; i++) {
+            results.push(i);
+        }
+        return results;
+    }
 
     includes(other: Ranged<T>): boolean {
         return this.firstLowerValue <= other.firstLowerValue
@@ -254,7 +266,7 @@ export function cartesian2<A1,A2,A3,A4>(...arrays: [ A1[], A2[], A3[], A4[] ]): 
 export function cartesian2<A1,A2,A3,A4,A5>(...arrays: [ A1[], A2[], A3[], A4[], A5[] ]): [A1,A2,A3,A4,A5][];
 export function cartesian2<A1,A2,A3,A4,A5,A6>(...arrays: [ A1[], A2[], A3[], A4[], A5[], A6[] ]): [A1,A2,A3,A4,A5,A6][];
 export function cartesian2(...arrays: any[]): any[][] {
-    return cartesian(arrays);
+    return cartesian(...arrays);
 }
 // source : https://stackoverflow.com/a/36234242/476345
 export function cartesian(...arrays: any[][]): any[][] {

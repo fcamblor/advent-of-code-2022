@@ -266,7 +266,7 @@ export function cartesian2<A1,A2,A3,A4>(...arrays: [ A1[], A2[], A3[], A4[] ]): 
 export function cartesian2<A1,A2,A3,A4,A5>(...arrays: [ A1[], A2[], A3[], A4[], A5[] ]): [A1,A2,A3,A4,A5][];
 export function cartesian2<A1,A2,A3,A4,A5,A6>(...arrays: [ A1[], A2[], A3[], A4[], A5[], A6[] ]): [A1,A2,A3,A4,A5,A6][];
 export function cartesian2(...arrays: any[]): any[][] {
-    return cartesian(arrays);
+    return cartesian(...arrays);
 }
 // source : https://stackoverflow.com/a/36234242/476345
 export function cartesian(...arrays: any[][]): any[][] {

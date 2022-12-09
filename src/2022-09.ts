@@ -12,7 +12,7 @@ type D09_MOVE_OPERATION = {
 
 type D09_Position = {x: number, y: number};
 
-class D09Grid {
+export class D09Grid {
     private hashedVisitedTailPositions = new Set<string>();
     private visitedTailPositions = [] as D09_Position[];
     private hashedVisitedHeadPositions = new Set<string>();
@@ -96,12 +96,12 @@ class D09Grid {
         return this.visitedTailPositions.length;
     }
 
-    public show(): string {
+    public show(dimensions?: {minX: number, maxX: number, minY: number, maxY: number}): string {
         const allVisitedPositions = this.visitedTailPositions.concat(this.visitedHeadPositions);
-        const minX = Math.min(...allVisitedPositions.map(p => p.x))
-        const maxX = Math.max(...allVisitedPositions.map(p => p.x))
-        const minY = Math.min(...allVisitedPositions.map(p => p.y))
-        const maxY = Math.max(...allVisitedPositions.map(p => p.y))
+        const minX = dimensions?.minX || Math.min(...allVisitedPositions.map(p => p.x))
+        const maxX = dimensions?.maxX || Math.max(...allVisitedPositions.map(p => p.x))
+        const minY = dimensions?.minY || Math.min(...allVisitedPositions.map(p => p.y))
+        const maxY = dimensions?.maxY || Math.max(...allVisitedPositions.map(p => p.y))
         const height = maxY - minY;
 
         const strMatrix: string[][] = []

@@ -12,7 +12,7 @@ type D09_MOVE_OPERATION = {
 
 type D09_Position = {x: number, y: number};
 
-export class D09Grid {
+export class D09Snake {
     private hashedVisitedTailPositions = new Set<string>();
     private visitedTailPositions = [] as D09_Position[];
     private hashedVisitedHeadPositions = new Set<string>();
@@ -22,7 +22,7 @@ export class D09Grid {
 
     private gridSnapshots: string[] = [];
 
-    constructor(private readonly startingPos: D09_Position = {x:0,y:0}, private readonly trackGridSnapshots: boolean = false) {
+    constructor(private readonly startingPos: D09_Position = {x:0,y:0}, private readonly length: number = 1, private readonly trackGridSnapshots: boolean = false) {
         this.head = {...startingPos};
         this.tail = {...startingPos};
         this.maybeRecordCurrentTailPosition();
@@ -115,7 +115,7 @@ export class D09Grid {
             switch(`${x}_${y}`){
                 case `${this.startingPos.x}_${this.startingPos.y}`: displayedValue='s';break;
                 case `${this.head.x}_${this.head.y}`: displayedValue='H';break;
-                case `${this.tail.x}_${this.tail.y}`: displayedValue='T';break;
+                case `${this.tail.x}_${this.tail.y}`: displayedValue='1';break;
                 default:
                     if(this.hashedVisitedTailPositions.has(`${x}_${y}`)) {
                         displayedValue = '#';
@@ -145,12 +145,12 @@ export function D09_parseInput(input: string): D09_MOVE_OPERATION[] {
     })
 }
 
-export function D09_parseThenRunOps(input: string, debugGridSnapshots: boolean): D09Grid {
+export function D09_parseThenRunOps(input: string, debugGridSnapshots: boolean): D09Snake {
     const ops = D09_parseInput(input);
-    const grid = new D09Grid({x:0, y:0}, debugGridSnapshots);
+    const snake = new D09Snake({x:0, y:0}, 1, debugGridSnapshots);
 
     ops.forEach((op, idx) => {
-        grid.move(op);
+        snake.move(op);
     });
-    return grid;
+    return snake;
 }

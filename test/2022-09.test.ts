@@ -4,7 +4,7 @@ import {
     D09_Q1_GRID_EXPECTATIONS,
     D09_Q1_SAMPLE,
 } from "./2022-09.inputs";
-import {D09_parseInput, D09_parseThenRunOps, D09Grid} from "../src/2022-09";
+import {D09_parseInput, D09_parseThenRunOps, D09Snake} from "../src/2022-09";
 import {Ranged} from "../src/utils";
 
 [
@@ -24,17 +24,22 @@ import {Ranged} from "../src/utils";
         sample: D09_Q1_SAMPLE,
         expectations: D09_Q1_GRID_EXPECTATIONS,
         dimensions: {minX: 0, maxX: 5, minY: 0, maxY: 4}
+    }, {
+        name: "Q2 sample intermediate steps",
+        sample: D09_Q2_SAMPLE,
+        expectations: D09_Q2_GRID_EXPECTATIONS,
+        dimensions: {minX: -11, maxX: 14, minY: -5, maxY: 15}
     }
 ].forEach(descriptor => {
     Ranged.included(0, descriptor.expectations.length-1).values().forEach(expectationIndex => {
         const ops = D09_parseInput(descriptor.sample);
         test(`${descriptor.name} [${expectationIndex}]`, () => {
-            const grid = new D09Grid({x:0, y:0}, false);
+            const snake = new D09Snake({x:0, y:0}, 1, false);
 
             Ranged.included(0, expectationIndex-1).values().forEach(opIndex => {
-                grid.move(ops[opIndex])
+                snake.move(ops[opIndex])
             })
-            expect(grid.show(descriptor.dimensions)).toEqual(descriptor.expectations[expectationIndex])
+            expect(snake.show(descriptor.dimensions)).toEqual(descriptor.expectations[expectationIndex])
         })
     })
 });

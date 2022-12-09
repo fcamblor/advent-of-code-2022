@@ -33,6 +33,15 @@ export class Ranged<T extends Comparable> {
     static included<T extends Comparable>(lowerBound: T, upperBound: T) {
         return new Ranged(lowerBound,true,upperBound,true);
     }
+    static includedExcluded<T extends Comparable>(lowerBound: T, upperBound: T) {
+        return new Ranged(lowerBound,true,upperBound,false);
+    }
+    static excluded<T extends Comparable>(lowerBound: T, upperBound: T) {
+        return new Ranged(lowerBound,false,upperBound,false);
+    }
+    static excludedIncluded<T extends Comparable>(lowerBound: T, upperBound: T) {
+        return new Ranged(lowerBound,false,upperBound,true);
+    }
 
     get firstLowerValue(){ return this.firstBoundedValue('lower', this.lowerBound, this.lowerIncluded); }
     get firstUpperValue(){ return this.firstBoundedValue('upper', this.upperBound, this.upperIncluded); }

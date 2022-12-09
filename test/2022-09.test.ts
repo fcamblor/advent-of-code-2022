@@ -31,12 +31,12 @@ import {Ranged} from "../src/utils";
         dimensions: {minX: -11, maxX: 14, minY: -5, maxY: 15}
     }
 ].forEach(descriptor => {
-    Ranged.included(0, descriptor.expectations.length-1).values().forEach(expectationIndex => {
+    Ranged.includedExcluded(0, descriptor.expectations.length).values().forEach(expectationIndex => {
         const ops = D09_parseInput(descriptor.sample);
         test(`${descriptor.name} [${expectationIndex}]`, () => {
             const snake = new D09Snake({x:0, y:0}, 1, false);
 
-            Ranged.included(0, expectationIndex-1).values().forEach(opIndex => {
+            Ranged.includedExcluded(0, expectationIndex).values().forEach(opIndex => {
                 snake.move(ops[opIndex])
             })
             expect(snake.show(descriptor.dimensions)).toEqual(descriptor.expectations[expectationIndex])

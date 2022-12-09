@@ -42,8 +42,8 @@ export function D08_isTreePositionVisible(grid: number[][], [i,j]: [ number, num
 
 export function D08_countVisibleTrees(grid: number[][]): number {
     return cartesian2(
-        Ranged.included(0, grid.length-1).values(),
-        Ranged.included(0, grid[0].length-1).values(),
+        Ranged.includedExcluded(0, grid.length).values(),
+        Ranged.includedExcluded(0, grid[0].length).values(),
     ).reduce((total, [i,j]) => {
         return total + (D08_isTreePositionVisible(grid, [i,j])?1:0)
     }, 0)
@@ -78,8 +78,8 @@ export function D08_scenicScoreOf(grid: number[][], [i,j]: [number,number]): Tre
 
 export function D08_findBestTreeScenicScores(grid: number[][]): {coords: [number,number], score: TreeScenicScore } {
     const treeScenicScores = cartesian2(
-        Ranged.included(1, grid.length-1).values(),
-        Ranged.included(1, grid[0].length-1).values(),
+        Ranged.includedExcluded(1, grid.length).values(),
+        Ranged.includedExcluded(1, grid[0].length).values(),
     ).map(([i,j]) => {
         return {coords: [i, j] as [number,number], score: D08_scenicScoreOf(grid, [i,j]) }
     }, 0)

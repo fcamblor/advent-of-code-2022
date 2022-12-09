@@ -29,7 +29,7 @@ export class D09Snake {
     }
 
     move(op: D09_MOVE_OPERATION) {
-        Ranged.included(0, op.value-1)
+        Ranged.includedExcluded(0, op.value)
             .values()
             .forEach(idx => {
                 this.move1(op.direction)

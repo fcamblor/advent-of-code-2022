@@ -1,7 +1,9 @@
 
 import {D10_INPUT, D10_Q1_SAMPLE1, D10_Q1_SAMPLE2} from "./2022-10.inputs";
-import {D10_executeOps, D10_getOperationsAtCPUOffset, D10_parseInput} from "../src/2022-10";
-// import {D10_superFunctionForQ1, D10_superFunctionForQ2} from "../src/2022-10";
+import {
+    D10_executeCycles,
+    D10_parseInput
+} from "../src/2022-10";
 
 [
   {
@@ -31,9 +33,8 @@ import {D10_executeOps, D10_getOperationsAtCPUOffset, D10_parseInput} from "../s
     descriptor.expectations.forEach(expectation => {
         test(`${descriptor.name} at offset ${expectation.offset}`, () => {
             const ops = D10_parseInput(descriptor.sample);
-            const filteredOps = D10_getOperationsAtCPUOffset(ops, expectation.offset)
-            const x = D10_executeOps(filteredOps);
-            expect(x).toEqual(expectation.expectedX);
+            const result = D10_executeCycles(ops, expectation.offset)
+            expect(result.x).toEqual(expectation.expectedX);
         })
     })
 });
@@ -53,7 +54,7 @@ import {D10_executeOps, D10_getOperationsAtCPUOffset, D10_parseInput} from "../s
         const cycles = [20,60,100,140,180,220]
         const ops = D10_parseInput(descriptor.sample);
         const result = cycles
-            .map(cycle => D10_executeOps(D10_getOperationsAtCPUOffset(ops, cycle))*cycle)
+            .map(cycle => D10_executeCycles(ops, cycle).x*cycle)
             .reduce((total, val) => total + val, 0);
         expect(result).toEqual(descriptor.expectation);
     })

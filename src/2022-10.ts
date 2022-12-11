@@ -30,7 +30,9 @@ export function D10_executeOps(ops: D10_OP[]): number {
 export function D10_executeCycles(ops: D10_OP[], cyclesCount: number, onCycleDone: (cycleOffset: number, x: number) => void = () => null) {
     return Ranged.includedExcluded(1, cyclesCount).values().reduce(({ ops, opIndex, consumedCPUCylesOnOp, x, executedOps }, cycleOffset) => {
         const currentOp = ops[opIndex];
-        assert(currentOp, `Operations overflow detected !`)
+        assert(currentOp, `Operations overflow detected: opIndex=${opIndex} and length=${ops.length} !`)
+
+        onCycleDone(cycleOffset-1, x);
 
         consumedCPUCylesOnOp++;
 
@@ -38,12 +40,27 @@ export function D10_executeCycles(ops: D10_OP[], cyclesCount: number, onCycleDon
             x = D10_operate(x, currentOp)
             executedOps.push(currentOp);
 
-            onCycleDone(cycleOffset, x);
-
             opIndex++;
             consumedCPUCylesOnOp = 0;
         }
 
         return { ops, opIndex, consumedCPUCylesOnOp, x, executedOps };
     }, { ops, opIndex: 0, consumedCPUCylesOnOp: 0, x: 1, executedOps: [] } as { ops: D10_OP[], opIndex: 0, consumedCPUCylesOnOp: number, x: number, executedOps: D10_OP[] })
+}
+
+export function D10_drawCRT(size: {width: number, height: number}, ops: D10_OP[]): string {
+    const crt: string[] = [];
+    D10_executeCycles(ops, size.width*size.height+1, (cycleOffset, x) => {
+        const lineOffset = cycleOffset % size.width;
+        if(lineOffset === 0 && cycleOffset !== 0) {
+            crt.push("\n")
+        }
+
+        if(Math.max(0, x-1) <= lineOffset && lineOffset <= Math.min(x+1, size.width)) {
+            crt.push("#")
+        } else {
+            crt.push(".")
+        }
+    })
+    return crt.join("");
 }

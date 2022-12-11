@@ -1,6 +1,7 @@
 
 import {D10_INPUT, D10_Q1_SAMPLE1, D10_Q1_SAMPLE2} from "./2022-10.inputs";
 import {
+    D10_drawCRT,
     D10_executeCycles,
     D10_parseInput
 } from "../src/2022-10";
@@ -60,15 +61,26 @@ import {
     })
 });
 
-/*
-[
-  {name: "Q2 Sample", sample: D10_Q1_SAMPLE, expectation: 42},
-  {name: "Q2 Input", sample: D10_INPUT, expectation: 42}
-].forEach(descriptor => {
-  test(descriptor.name, () => {
-      expect(D10_parseInput(descriptor.sample)).toEqual(descriptor.expectation);
-  })
-});
+test(`Q2 sample`, () => {
+    const ops = D10_parseInput(D10_Q1_SAMPLE2);
+    expect(D10_drawCRT({width: 40, height: 6}, ops)).toEqual(`
+##..##..##..##..##..##..##..##..##..##..
+###...###...###...###...###...###...###.
+####....####....####....####....####....
+#####.....#####.....#####.....#####.....
+######......######......######......####
+#######.......#######.......#######.....
+    `.trim())
+})
 
-*/
-
+test(`Q2 INPUT`, () => {
+    const ops = D10_parseInput(D10_INPUT);
+    expect(D10_drawCRT({width: 40, height: 6}, ops)).toEqual(`
+####.#....###..#....####..##..####.#....
+#....#....#..#.#.......#.#..#....#.#....
+###..#....#..#.#......#..#......#..#....
+#....#....###..#.....#...#.##..#...#....
+#....#....#....#....#....#..#.#....#....
+####.####.#....####.####..###.####.####.
+    `.trim())
+})

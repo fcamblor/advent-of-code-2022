@@ -20,19 +20,29 @@ import {D${day}_INPUT, D${day}_Q1_SAMPLE} from "./$year-$day.inputs";
 // import {D${day}_superFunctionForQ1, D${day}_superFunctionForQ2} from "../src/$year-$day";
 
 /*
-[
-  {name: "Q1 Sample", sample: D${day}_Q1_SAMPLE, expectation: 42},
-  {name: "Q1 Input", sample: D${day}_INPUT, expectation: 42}
-].forEach(descriptor => {
+[{
+    name: "Q1 Sample",
+    sample: D${day}_Q1_SAMPLE,
+    expectation: 42
+}, {
+    name: "Q1 Input",
+    sample: D${day}_INPUT,
+    expectation: 42
+}].forEach(descriptor => {
   test(descriptor.name, () => {
       expect(D${day}_parseInput(descriptor.sample)).toEqual(descriptor.expectation);
   })
 });
 
-[
-  {name: "Q2 Sample", sample: D${day}_Q1_SAMPLE, expectation: 42},
-  {name: "Q2 Input", sample: D${day}_INPUT, expectation: 42}
-].forEach(descriptor => {
+[{
+   name: "Q2 Sample",
+   sample: D${day}_Q1_SAMPLE,
+   expectation: 42
+}, {
+   name: "Q2 Input",
+   sample: D${day}_INPUT,
+   expectation: 42
+}].forEach(descriptor => {
   test(descriptor.name, () => {
       expect(D${day}_parseInput(descriptor.sample)).toEqual(descriptor.expectation);
   })
